@@ -1,4 +1,5 @@
 import Image from "next/image";
+import ButtonSmall from "@/app/ui/ButtonSmall";
 
 const SectionContact = () => {
     return (
@@ -14,9 +15,7 @@ const SectionContact = () => {
                         Life can be challenging—especially when you're trying to balance your personal and professional life.
                         It's easy to feel like you're alone in facing these challenges, but I want you to know that I'm here to help.
                     </p>
-                    <button className="bg-indigo-100 text-indigo-800 py-3 px-6 rounded-lg hover:bg-indigo-200 transition">
-                        Get in touch
-                    </button>
+                  <ButtonSmall>Get in touch</ButtonSmall>
                 </div>
 
                 {/* Image */}

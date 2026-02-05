@@ -1,40 +1,41 @@
 import Image from "next/image";
-import Navbar from "@/app/components/Navbar";
+import ButtonLarge from "@/app/ui/ButtonLarge";
 
 const Hero = () => {
     return (
-        <section className="relative h-screen w-full">
+        <section className="relative bg-[var(--primary)] min-h-[90vh] md:min-h-screen">
+            <div className="mx-auto max-w-7xl px-6 md:px-12 pt-28 md:pt-32 pb-20">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-center">
 
-            {/* Background Image */}
-            <Image
-                src="/images/hero.jpg"
-                alt="Therapy consulting"
-                fill
-                priority
-                className="object-cover"
-            />
-
-            {/* Dark overlay for readability */}
-            <div className="absolute inset-0 bg-black/25" />
-
-            {/* Foreground content */}
-            <div className="relative z-10 h-full">
-                <Navbar />
-
-                {/* Hero Text */}
-                <div className="flex items-center h-full px-6 md:px-12">
-                    <div className="max-w-2xl text-white">
-                        <h1 className="text-4xl md:text-6xl font-serif leading-tight mb-6">
-                            Thoughtful therapy<br />for modern lives
+                    {/* Left: Text */}
+                    <div>
+                        <h1 className="text-4xl md:text-6xl  leading-[1.1]
+                        font-lora text-[var(--accent)] mb-6">
+                            Thoughtful therapy
+                            <br />
+                            for modern lives
                         </h1>
-                        <p className="text-lg md:text-xl text-white/90">
-                            A calm, supportive space to slow down, reflect, and heal.
+
+                        <p className="text-lg md:text-xl leading-relaxed text-[var(--secondary)]/80 mb-10 max-w-xl">
+                            A calm, supportive space to slow down, reflect, and heal — guided by care, clarity, and connection.
                         </p>
-                        <button>Connect with me </button>
+
+                        <ButtonLarge>Get in touch</ButtonLarge>
                     </div>
+
+                    {/* Right: Image */}
+                    <div className="relative w-full h-[380px] md:h-[520px] rounded-[2.75rem] overflow-hidden">
+                        <Image
+                            src="/images/hero.jpg"
+                            alt="Therapy consulting"
+                            fill
+                            priority
+                            className="object-cover"
+                        />
+                    </div>
+
                 </div>
             </div>
-
         </section>
     );
 };
