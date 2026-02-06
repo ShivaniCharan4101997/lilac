@@ -1,13 +1,84 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import { MessageCircle,Hourglass } from "lucide-react";
+import { MessageCircle, Hourglass } from "lucide-react";
 import ButtonSmall from "@/app/ui/ButtonSmall";
 
+gsap.registerPlugin(ScrollTrigger);
+
 const SectionCalm = () => {
+
+    const sectionRef = useRef(null);
+    const textRef = useRef(null);
+    const buttonRef = useRef(null);
+    const mainImageRef = useRef(null);
+    const floatingImageRef = useRef(null);
+
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            // Text block
+            gsap.from(textRef.current.children, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                y: 30,
+                opacity: 0,
+                stagger: 0.15,
+                duration: 0.8,
+                ease: "power3.out",
+            });
+
+            // Button
+            gsap.from(buttonRef.current, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 70%",
+                },
+                y: 20,
+                opacity: 0,
+                duration: 0.6,
+                ease: "power3.out",
+            });
+
+            // Main image
+            gsap.from(mainImageRef.current, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                opacity: 0,
+                scale: 1.04,
+                duration: 1,
+                ease: "power3.out",
+            });
+
+            // Floating image (slight delay & offset)
+            gsap.from(floatingImageRef.current, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 70%",
+                },
+                y: 40,
+                opacity: 0,
+                duration: 0.9,
+                ease: "power3.out",
+                delay: 0.2,
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
+
     return (
         <section className="px-6 md:px-12 py-20 bg-[var(--primary)]">
             <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-
-                <div>
+                <div ref={textRef}>
                     <h2 className="text-3xl md:text-4xl italic font-serif text-[var(--secondary)] mb-4">
                         Your Safe Space for Calm & Clarity
                     </h2>
@@ -21,30 +92,33 @@ const SectionCalm = () => {
 
                     <div className="space-y-3 text-neutral-600 text-sm">
                         <p className="flex items-center gap-2">
-                             <Hourglass /> Open daily from <span className="font-bold font-black"> 7:00 AM</span> to <span className="font-bold font-black"> 6:00 PM</span>
+                            <Hourglass />
+                            Open daily from <span className="font-black">7:00 AM</span> to{" "}
+                            <span className="font-black">6:00 PM</span>
                         </p>
                         <p className="flex items-center gap-2">
                             <MessageCircle size={18} />
                             Available during all open hours
                         </p>
                     </div>
-                    <div className="mt-5">
-                        <ButtonSmall>Learn more</ButtonSmall>
-                    </div>
-
                 </div>
+
 
                 {/* Images */}
                 <div className="relative w-full h-[500px]">
-                    <Image
-                        src="/images/office1.jpeg"
-                        alt="Calm therapy office in Santa Monica"
-                        fill
-                        className="object-cover rounded-2xl shadow-md"
-                    />
+                    <div ref={mainImageRef} className="absolute inset-0">
+                        <Image
+                            src="/images/office1.jpeg"
+                            alt="Calm therapy office in Santa Monica"
+                            fill
+                            className="object-cover rounded-2xl shadow-md"
+                        />
+                    </div>
 
-
-                    <div className="absolute bottom-[-10%] left-[-5%] w-1/2 h-1/2">
+                    <div
+                        ref={floatingImageRef}
+                        className="absolute bottom-[-10%] left-[-5%] w-1/2 h-1/2"
+                    >
                         <Image
                             src="/images/office2.jpeg"
                             alt="Private therapy space with natural light"
@@ -52,8 +126,8 @@ const SectionCalm = () => {
                             className="object-cover rounded-2xl shadow-lg border-4 border-white"
                         />
                     </div>
-
                 </div>
+
             </div>
         </section>
     );

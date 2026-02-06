@@ -1,4 +1,11 @@
-import FeatureCard from "@/app/ui/FeatureCard"
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import FeatureCard from "@/app/ui/FeatureCard";
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const services = [
@@ -26,24 +33,65 @@ const services = [
 
 
 const SectionFeatures = () => {
-    return (
-        <section className="px-6 md:px-12 py-20 bg-[var(--primary)]">
+    const sectionRef = useRef(null);
+    const headingRef = useRef(null);
+    const cardsRef = useRef([]);
 
-            <h2 className="text-3xl md:text-5xl font-serif italic text-[var(--accent)] text-center mb-12">
+    const setCardRef = (el, index) => {
+        cardsRef.current[index] = el;
+    };
+
+    useEffect(() => {
+        const ctx = gsap.context(() => {
+            gsap.from(headingRef.current, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 80%",
+                },
+                y: 30,
+                opacity: 0,
+                duration: 0.8,
+                ease: "power3.out",
+            });
+
+            gsap.from(cardsRef.current, {
+                scrollTrigger: {
+                    trigger: sectionRef.current,
+                    start: "top 75%",
+                },
+                y: 40,
+                opacity: 0,
+                stagger: 0.2,
+                duration: 0.9,
+                ease: "power3.out",
+            });
+        }, sectionRef);
+
+        return () => ctx.revert();
+    }, []);
+
+
+    return (
+        <section ref={sectionRef} className="px-6 md:px-12 py-20 bg-[var(--primary)]">
+
+            <h2   ref={headingRef} className="text-3xl md:text-5xl font-serif italic text-[var(--accent)] text-center mb-12">
                 My Specialties
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                 {services.map((feature, index) => (
-                    <FeatureCard
-                        img={feature.img}
+                    <div
                         key={index}
-                        title={feature.title}
-                        description={feature.description}
-                    />
+                        ref={(el) => setCardRef(el, index)}
+                    >
+                        <FeatureCard
+                            img={feature.img}
+                            title={feature.title}
+                            description={feature.description}
+                        />
+                    </div>
                 ))}
             </div>
-
         </section>
     );
 };

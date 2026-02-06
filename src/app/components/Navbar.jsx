@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import gsap from "gsap";
+
 
 const navLinks = [
     { label: "Home", href: "/" },
@@ -15,6 +17,15 @@ const navLinks = [
 const Navbar = () => {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
+    const navRef = useRef(null);
+    useEffect(() => {
+        gsap.from(navRef.current, {
+            y: -40,
+            opacity: 0,
+            duration: 0.8,
+            ease: "power3.out",
+        });
+    }, []);
 
     const linkClass = (path) =>
         pathname === path
@@ -22,10 +33,13 @@ const Navbar = () => {
             : "font-normal opacity-80 hover:opacity-100";
 
     return (
-        <nav className="absolute top-0 left-0 w-full z-30 px-6 md:px-12 py-6">
-            <div className="flex items-center justify-between text-[var(--accent)]">
+        <nav
+            ref={navRef}
+            className="absolute top-0 left-0 w-full z-30 px-6 md:px-12 py-6"
+        >
+        <div className="flex items-center justify-between text-[var(--accent)]">
                 {/* Logo */}
-                <Link href="/" className="text-2ˀxl tracking-wide font-heading">
+                <Link href="/" className="text-2xl tracking-wide font-heading">
                     StillMind
                 </Link>
 

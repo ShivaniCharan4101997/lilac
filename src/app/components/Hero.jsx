@@ -1,13 +1,46 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
 import Image from "next/image";
 import ButtonLarge from "@/app/ui/ButtonLarge";
 
+
 const Hero = () => {
+    const textRef = useRef(null);
+    const imageRef = useRef(null);
+
+
+    useEffect(() => {
+        const tl = gsap.timeline({
+            defaults: {
+                ease: "power3.out",
+                duration: 0.8,
+            },
+        });
+
+        tl.from(textRef.current.children, {
+            y: 30,
+            opacity: 0,
+            stagger: 0.15,
+        })
+            .from(
+                imageRef.current,
+                {
+                    scale: 1.05,
+                    opacity: 0,
+                },
+                "-=0.6"
+            );
+    }, []);
+
+
     return (
         <section className="relative bg-[var(--primary)] min-h-[90vh] md:min-h-screen">
             <div className="mx-auto max-w-7xl px-6 md:px-12 pt-28 md:pt-32 pb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-center">
 
-                    <div>
+                    <div ref={textRef}>
                         <h1 className="text-2xl md:text-4xl  leading-[1.1]
                         font-lora italic text-[var(--accent)] mb-6">
                             Embrace your journey
@@ -21,12 +54,11 @@ const Hero = () => {
                             burned out, or stuck in constant overthinking—offered in person in Santa
                             Monica and online throughout California.
                         </p>
-
-                        <ButtonLarge>Get in touch</ButtonLarge>
+                            <ButtonLarge>Get in touch</ButtonLarge>
                     </div>
 
              
-                    <div className="relative w-full h-[380px] md:h-[520px] rounded-[2.75rem] overflow-hidden">
+                    <div ref={imageRef} className="relative w-full h-[380px] md:h-[520px] rounded-[2.75rem] overflow-hidden">
                         <Image
                             src="/images/hero.jpg"
                             alt="Therapy consulting"
