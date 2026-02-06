@@ -1,39 +1,40 @@
 import FeatureCard from "@/app/ui/FeatureCard"
 
 
-const features = [
+const services = [
     {
-        title: "Anxiety & Overwhelm",
-        img:"/images/anxiety.jpg",
+        title: "Anxiety & Panic Therapy",
+        img: "/images/anxiety.jpg",
         description:
-            "Support for persistent worry, racing thoughts, and feeling constantly on edge.",
+            "Support for adults experiencing persistent worry, panic symptoms, physical tension, and difficulty relaxing. Therapy focuses on understanding both emotional and physiological patterns driving anxiety.",
     },
     {
-        title: "Trauma & Emotional Healing",
-        img:"/images/trauma.jpg",
+        title: "Trauma & EMDR Therapy",
+        img: "/images/trauma.jpg",
         description:
-            "A gentle, body-aware approach to processing past experiences safely.",
+            "Trauma-informed therapy for adults impacted by single-incident or long-standing trauma. A paced, body-aware approach emphasizes safety, stabilization, and nervous-system regulation.",
     },
     {
         title: "Burnout & Perfectionism",
-        img:"/images/burnout.jpg",
+        img: "/images/burnout.jpg",
         description:
-            "Helping high-achieving adults slow down, reset boundaries, and reconnect.",
+            "Support for high-achieving professionals navigating burnout, chronic stress, and perfectionism. Therapy becomes a space to slow down, reconnect, and develop more sustainable ways of living and working.",
     },
 ];
 
 
 
+
 const SectionFeatures = () => {
     return (
-        <section className="px-6 md:px-12 py-20">
+        <section className="px-6 md:px-12 py-20 bg-[var(--primary)]">
 
-            <h2 className="text-3xl md:text-4xl font-serif text-center mb-12">
+            <h2 className="text-3xl md:text-5xl font-serif italic text-[var(--accent)] text-center mb-12">
                 My Specialties
             </h2>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {features.map((feature, index) => (
+                {services.map((feature, index) => (
                     <FeatureCard
                         img={feature.img}
                         key={index}

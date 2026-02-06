@@ -1,90 +1,89 @@
-'use client'
+'use client';
 
 import { useState } from "react";
-import Image from "next/image";
 
 const faqs = [
     {
-        question: "How do I know if therapy is right for me?",
-        answer: "Therapy can be helpful for anyone looking to explore their thoughts and feelings in a safe environment. If you’re feeling stuck, overwhelmed, or want guidance, it may be the right time to start.",
+        question: "Who do you typically work with?",
+        answer:
+            "I work primarily with adults who feel overwhelmed by anxiety, stress, trauma, or burnout. Many of my clients are high-achieving professionals, creatives, or entrepreneurs who appear functional on the outside but feel exhausted, tense, or emotionally stuck internally.",
     },
     {
-        question: "Do you offer telehealth sessions?",
-        answer: "Yes! I provide both in-person sessions in Santa Monica, CA, and secure telehealth sessions across California.",
+        question: "What issues do you specialize in?",
+        answer:
+            "My work often focuses on anxiety, panic, trauma, and burnout. I also support clients navigating perfectionism, chronic stress, and the lingering effects of past experiences that continue to impact their confidence, relationships, or sense of safety.",
     },
     {
-        question: "What therapy approaches do you use?",
-        answer: "I use CBT, EMDR, mindfulness, and body-based techniques, tailoring each session to your needs and goals.",
+        question: "What is your approach to therapy?",
+        answer:
+            "I take a warm, collaborative, and grounded approach. Sessions are structured enough to feel supportive while still allowing space for reflection and depth. I integrate evidence-based approaches such as CBT, EMDR, mindfulness-based practices, and body-oriented techniques.",
+    },
+    {
+        question: "Do you offer trauma therapy?",
+        answer:
+            "Yes. Trauma work is an important part of my practice. I work with both single-incident trauma and more complex, long-standing patterns. Therapy is paced carefully, with a strong emphasis on safety, stabilization, and helping clients feel more regulated in daily life.",
+    },
+    {
+        question: "Do you offer in-person or online sessions?",
+        answer:
+            "I offer in-person therapy from my Santa Monica office as well as secure telehealth sessions for clients located anywhere in California.",
+    },
+    {
+        question: "What is your office like?",
+        answer:
+            "My office is a quiet, private, and calming space with natural light and a comfortable, uncluttered environment. Many clients share that the space itself helps them feel more grounded and at ease.",
     },
 ];
 
-const SectionFAQs = () => {
+
+const SectionFAQ = () => {
     const [openIndex, setOpenIndex] = useState(null);
 
-    const toggleFAQ = (index) => {
-        setOpenIndex(openIndex === index ? null : index);
-    };
-
     return (
-        <section className="px-6 md:px-12 py-20 bg-gray-50">
-            {/* Added min-h to keep the section container stable */}
-            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+        <section className="px-6 md:px-12 py-20 bg-[var(--secondary)]">
+            <div className="max-w-3xl mx-auto">
 
-                {/* Image - Added priority and fixed aspect ratio container */}
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg shadow-sm">
-                    <Image
-                        src="/images/faq.jpg"
-                        alt="Therapy session FAQ"
-                        fill
-                        priority // Prevents LCP layout shift
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        className="object-cover"
-                    />
+                {/* Heading */}
+                <h2 className="text-3xl md:text-4xl italic font-serif text-center mb-12 text-[var(--primary)]">
+                    Common Questions
+                </h2>
+
+                {/* FAQ Items */}
+                <div className="space-y-4">
+                    {faqs.map((faq, index) => (
+                        <div
+                            key={index}
+                            className="border border-neutral-300 rounded-xl overflow-hidden bg-[var(--primary)]"
+                        >
+                            <button
+                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                                className="w-full flex justify-between items-center px-6 py-5 text-left"
+                            >
+                <span className="font-medium text-[var(--accent)] text-lg">
+                  {faq.question}
+                </span>
+                                <span className="text-2xl text-neutral-500">
+                  {openIndex === index ? "–" : "+"}
+                </span>
+                            </button>
+
+                            <div
+                                className="transition-all duration-300 ease-in-out overflow-hidden"
+                                style={{
+                                    maxHeight: openIndex === index ? "300px" : "0px",
+                                }}
+                            >
+                                <p className="px-6 pb-6 text-neutral-700 leading-relaxed">
+                                    {faq.answer}
+                                </p>
+                            </div>
+                        </div>
+                    ))}
                 </div>
 
-                {/* FAQ Text */}
-                <div className="flex flex-col">
-                    <h2 className="text-3xl md:text-4xl font-serif mb-6">FAQs</h2>
-                    <p className="text-neutral-700 mb-8">
-                        Here are some common questions clients ask about therapy, what to expect, and how to get started.
-                    </p>
-
-                    <div className="space-y-4">
-                        {faqs.map((faq, index) => {
-                            const isOpen = openIndex === index;
-                            return (
-                                <div key={index} className="border border-neutral-200 rounded-lg bg-white overflow-hidden transition-all duration-200">
-                                    <button
-                                        onClick={() => toggleFAQ(index)}
-                                        aria-expanded={isOpen}
-                                        className="w-full text-left px-5 py-4 flex justify-between items-center hover:bg-neutral-50 transition-colors"
-                                    >
-                                        <span className="font-medium text-neutral-900">{faq.question}</span>
-                                        <span className={`transform transition-transform duration-300 ${isOpen ? "rotate-45" : "rotate-0"}`}>
-                                            +
-                                        </span>
-                                    </button>
-
-                                    {/* Grid-based transition for smoother, shift-free expansion */}
-                                    <div
-                                        className={`grid transition-all duration-300 ease-in-out ${
-                                            isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                                        }`}
-                                    >
-                                        <div className="overflow-hidden">
-                                            <div className="px-5 pb-5 text-neutral-600 leading-relaxed">
-                                                {faq.answer}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
             </div>
         </section>
     );
 };
 
-export default SectionFAQs;
+export default SectionFAQ;

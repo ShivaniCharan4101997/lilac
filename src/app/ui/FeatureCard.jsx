@@ -2,8 +2,7 @@ import Image from "next/image";
 
 const FeatureCard = ({ title, description, img }) => {
     return (
-        <div className="border border-neutral-300 p-6 text-center rounded-lg shadow-sm hover:shadow-md transition">
-            {/* Image */}
+        <div className="border bg-[var(--secondary)] text-[var(--primary)] p-6 text-center rounded-lg shadow-sm hover:shadow-md transition">
             {img && (
                 <Image
                     src={img}
@@ -14,8 +13,8 @@ const FeatureCard = ({ title, description, img }) => {
                 />
             )}
 
-            <h3 className="text-xl font-serif mb-2">{title}</h3>
-            <p className="text-neutral-600 leading-relaxed">{description}</p>
+            <h3 className="text-xl font-bold font-serif mb-2 ">{title}</h3>
+            <p className="opacity-60 leading-relaxed text-sm ">{description}</p>
         </div>
     );
 };

@@ -9,15 +9,18 @@ const Hero = () => {
 
                     {/* Left: Text */}
                     <div>
-                        <h1 className="text-4xl md:text-6xl  leading-[1.1]
-                        font-lora text-[var(--accent)] mb-6">
-                            Thoughtful therapy
-                            <br />
-                            for modern lives
+                        <h1 className="text-2xl md:text-4xl  leading-[1.1]
+                        font-lora italic text-[var(--accent)] mb-6">
+                            Embrace your journey
+                            to
+                            <br/>
+                            inner peace
                         </h1>
 
-                        <p className="text-lg md:text-xl leading-relaxed text-[var(--secondary)]/80 mb-10 max-w-xl">
-                            A calm, supportive space to slow down, reflect, and heal — guided by care, clarity, and connection.
+                        <p className="text-lg md:text-sm leading-relaxed text-[var(--secondary)]/80 mb-10 max-w-xl">
+                            Compassionate, evidence-based therapy for adults who feel overwhelmed,
+                            burned out, or stuck in constant overthinking—offered in person in Santa
+                            Monica and online throughout California.
                         </p>
 
                         <ButtonLarge>Get in touch</ButtonLarge>
