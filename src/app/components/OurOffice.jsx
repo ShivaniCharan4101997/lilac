@@ -35,9 +35,7 @@ const SectionCalm = () => {
                 </div>
 
                 {/* Images */}
-                <div className="relative w-full h-[500px]"> {/* Ensure the container has a defined height */}
-
-                    {/* Main background image (Bottom) */}
+                <div className="relative w-full h-[500px]">
                     <Image
                         src="/images/office1.jpeg"
                         alt="Calm therapy office in Santa Monica"
@@ -45,7 +43,7 @@ const SectionCalm = () => {
                         className="object-cover rounded-2xl shadow-md"
                     />
 
-                    {/* Secondary image (Top, Bottom-Left) */}
+
                     <div className="absolute bottom-[-10%] left-[-5%] w-1/2 h-1/2">
                         <Image
                             src="/images/office2.jpeg"

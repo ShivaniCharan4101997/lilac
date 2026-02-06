@@ -25,7 +25,7 @@ const Navbar = () => {
         <nav className="absolute top-0 left-0 w-full z-30 px-6 md:px-12 py-6">
             <div className="flex items-center justify-between text-[var(--accent)]">
                 {/* Logo */}
-                <Link href="/" className="text-2xl tracking-wide font-heading">
+                <Link href="/" className="text-2ˀxl tracking-wide font-heading">
                     StillMind
                 </Link>
 

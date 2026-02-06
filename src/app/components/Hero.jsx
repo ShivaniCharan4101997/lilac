@@ -7,7 +7,6 @@ const Hero = () => {
             <div className="mx-auto max-w-7xl px-6 md:px-12 pt-28 md:pt-32 pb-20">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-center">
 
-                    {/* Left: Text */}
                     <div>
                         <h1 className="text-2xl md:text-4xl  leading-[1.1]
                         font-lora italic text-[var(--accent)] mb-6">
@@ -26,7 +25,7 @@ const Hero = () => {
                         <ButtonLarge>Get in touch</ButtonLarge>
                     </div>
 
-                    {/* Right: Image */}
+             
                     <div className="relative w-full h-[380px] md:h-[520px] rounded-[2.75rem] overflow-hidden">
                         <Image
                             src="/images/hero.jpg"

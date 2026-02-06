@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from "react";
+import { Plus, Minus } from "lucide-react";
 
 const faqs = [
     {
@@ -36,54 +37,56 @@ const faqs = [
 ];
 
 
-const SectionFAQ = () => {
+
+const SectionFAQs = () => {
     const [openIndex, setOpenIndex] = useState(null);
 
     return (
-        <section className="px-6 md:px-12 py-20 bg-[var(--secondary)]">
+        <section className="px-4 sm:px-8 md:px-12 py-16 md:py-24 bg-[var(--secondary)]">
             <div className="max-w-3xl mx-auto">
-
-                {/* Heading */}
-                <h2 className="text-3xl md:text-4xl italic font-serif text-center mb-12 text-[var(--primary)]">
+                <h2 className="text-3xl md:text-5xl italic font-serif text-center mb-10 md:mb-16 text-[var(--primary)] leading-tight">
                     Common Questions
                 </h2>
 
-                {/* FAQ Items */}
-                <div className="space-y-4">
-                    {faqs.map((faq, index) => (
-                        <div
-                            key={index}
-                            className="border border-neutral-300 rounded-xl overflow-hidden bg-[var(--primary)]"
-                        >
-                            <button
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full flex justify-between items-center px-6 py-5 text-left"
-                            >
-                <span className="font-medium text-[var(--accent)] text-lg">
-                  {faq.question}
-                </span>
-                                <span className="text-2xl text-neutral-500">
-                  {openIndex === index ? "–" : "+"}
-                </span>
-                            </button>
-
+                <div className="space-y-3 md:space-y-4">
+                    {faqs.map((faq, index) => {
+                        const isOpen = openIndex === index;
+                        return (
                             <div
-                                className="transition-all duration-300 ease-in-out overflow-hidden"
-                                style={{
-                                    maxHeight: openIndex === index ? "300px" : "0px",
-                                }}
+                                key={index}
+                                className={`border border-neutral-200 rounded-2xl transition-all duration-300 bg-[var(--primary)] ${
+                                    isOpen ? "shadow-md ring-1 ring-[var(--primary)]/10" : "hover:border-neutral-300"
+                                }`}
                             >
-                                <p className="px-6 pb-6 text-neutral-700 leading-relaxed">
-                                    {faq.answer}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </div>
+                                <button
+                                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                                    className="w-full flex justify-between items-center gap-4 px-5 py-5 md:px-8 md:py-6 text-left"
+                                    aria-expanded={isOpen}
+                                >
+                                    <span className="font-medium text-[var(--accent)] text-base md:text-lg leading-snug">
+                                        {faq.question}
+                                    </span>
+                                    <span className="shrink-0 text-neutral-400">
+                                        {isOpen ? <Minus size={20} /> : <Plus size={20} />}
+                                    </span>
+                                </button>
 
+                                <div
+                                    className={`transition-all duration-300 ease-in-out overflow-hidden ${
+                                        isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                                    }`}
+                                >
+                                    <p className="px-5 pb-6 md:px-8 md:pb-8 text-neutral-600 text-sm md:text-base leading-relaxed">
+                                        {faq.answer}
+                                    </p>
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
             </div>
         </section>
     );
 };
 
-export default SectionFAQ;
+export default SectionFAQs;

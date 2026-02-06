@@ -6,7 +6,6 @@ const SectionAbout = () => {
         <section className="px-6 md:px-12 py-20 bg-[var(--primary)]">
             <div className="grid md:grid-cols-2 items-center gap-12">
 
-                {/* Text */}
                 <div>
                     <h1 className="text-3xl md:text-4xl font-serif leading-tight mb-6">
                         Meet
@@ -38,7 +37,6 @@ const SectionAbout = () => {
                    <ButtonSmall>Let's chat</ButtonSmall>
                 </div>
 
-                {/* Image */}
                 <div>
                     <Image
                         src="/images/maya.png"
