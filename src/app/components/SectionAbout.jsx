@@ -1,11 +1,9 @@
 "use client";
-
-
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Image from "next/image";
-import ButtonSmall from "@/app/ui/ButtonSmall";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,64 +12,61 @@ const SectionAbout = () => {
     const textRef = useRef(null);
     const buttonRef = useRef(null);
     const imageRef = useRef(null);
-    useEffect(() => {
-        const ctx = gsap.context(() => {
-            // Text reveal
-            gsap.from(textRef.current.children, {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-                y: 30,
-                opacity: 0,
-                stagger: 0.15,
-                duration: 0.8,
-                ease: "power3.out",
-            });
 
-            // Button
-            gsap.from(buttonRef.current, {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 70%",
-                },
-                y: 20,
-                opacity: 0,
-                duration: 0.6,
-                ease: "power3.out",
-            });
 
-            // Image reveal
-            gsap.from(imageRef.current, {
-                scrollTrigger: {
-                    trigger: sectionRef.current,
-                    start: "top 75%",
-                },
-                x: 40,
-                opacity: 0,
-                duration: 1,
-                ease: "power3.out",
-            });
-        }, sectionRef);
+    useGSAP(() => {
 
-        return () => ctx.revert();
-    }, []);
+        gsap.from(textRef.current.children, {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 75%",
+            },
+            y: 30,
+            opacity: 0,
+            stagger: 0.15,
+            duration: 0.8,
+            ease: "power3.out",
+        });
+
+
+        gsap.from(buttonRef.current, {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 70%",
+            },
+            y: 20,
+            opacity: 0,
+            duration: 0.6,
+            ease: "power3.out",
+        });
+
+        gsap.from(imageRef.current, {
+            scrollTrigger: {
+                trigger: sectionRef.current,
+                start: "top 75%",
+            },
+            x: 40,
+            opacity: 0,
+            duration: 1,
+            ease: "power3.out",
+        });
+    }, { scope: sectionRef });
 
 
     return (
-        <section className="px-6 md:px-12 py-20 bg-[var(--primary)]">
+        <section ref={sectionRef} className="px-6 md:px-12 py-24 bg-[var(--primary)]">
             <div className="grid md:grid-cols-2 items-center gap-12">
 
                 <div ref={textRef}>
-                    <h1 className="text-3xl md:text-4xl font-serif leading-tight mb-6">
+                    <h2 className="text-3xl md:text-4xl font-serif leading-tight mb-6">
                         Meet
                         <span className="block text-[var(--secondary)] italic mt-1">
-      Dr. Maya Reynolds,
-    </span>
+                            Dr. Maya Reynolds,
+                        </span>
                         <span className="block text-base md:text-lg tracking-wide text-neutral-500 mt-2">
-      PsyD
-    </span>
-                    </h1>
+                            PsyD
+                        </span>
+                    </h2>
 
                     <p className="text-neutral-700 leading-relaxed mb-6 pr-3">
                         I’m a licensed clinical psychologist based in Santa Monica, California,
@@ -98,11 +93,9 @@ const SectionAbout = () => {
                         alt="About Me"
                         width={500}
                         height={500}
-                        className="w-full h-auto object-cover rounded-lg"
+                        className="w-auto mx-auto h-auto max-h-[500px] object-contain  rounded-xl"
                     />
                 </div>
-
-
             </div>
         </section>
     );

@@ -11,16 +11,16 @@ import OurOffice from "@/app/components/OurOffice";
 
 export default function Home() {
   return (
-    <div >
-        <Navbar />
-        <Hero/>
-        <Divider/>
-        <SectionFeatures/>
-        <SectionAbout/>
-        <OurOffice/>
-        <SectionFAQs/>
-        <SectionCTA/>
-        <Footer/>
+    <div className="max-w-7xl mx-auto">
+      <Navbar />
+      <Hero />
+      <Divider />
+      <SectionFeatures />
+      <SectionAbout />
+      <OurOffice />
+      <SectionFAQs />
+      <SectionCTA />
+      <Footer />
     </div>
   );
 }

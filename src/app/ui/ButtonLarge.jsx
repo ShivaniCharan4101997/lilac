@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 const ButtonLarge = ({ children }) => {
     return (
         <button
-            className="
+            className={`
         group
         flex items-center justify-between md:justify-start
         gap-3 md:gap-6
@@ -13,18 +13,16 @@ const ButtonLarge = ({ children }) => {
         pl-6 pr-2 py-2
         md:pl-8 md:pr-3 md:py-3
 
-        bg-[var(--primary)]
-        text-[var(--accent)]
+        bg-primary
+        text-black
         border border-gray-300
         transition-all duration-200
-        hover:bg-[var(--secondary)]
-        hover:text-[var(--primary)]
         focus-visible:outline-none
         focus-visible:ring-2
         focus-visible:ring-gray-400
 
         w-full md:w-auto
-      "
+      `}
         >
             <span className="font-medium text-base md:text-lg">
                 {children}

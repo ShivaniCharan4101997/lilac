@@ -2,30 +2,32 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 
 
 const navLinks = [
     { label: "Home", href: "/" },
-    { label: "About", href: "/about" },
-    { label: "Blog", href: "/blog" },
-    { label: "Contact", href: "/contact" },
+    { label: "About", href: "#about" },
+    { label: "Blog", href: "#blog" },
+    { label: "Contact", href: "#contact" },
 ];
 
 const Navbar = () => {
     const pathname = usePathname();
     const [open, setOpen] = useState(false);
     const navRef = useRef(null);
-    useEffect(() => {
+
+    useGSAP(() => {
         gsap.from(navRef.current, {
             y: -40,
             opacity: 0,
             duration: 0.8,
             ease: "power3.out",
         });
-    }, []);
+    }, { scope: navRef });
 
     const linkClass = (path) =>
         pathname === path
@@ -37,9 +39,9 @@ const Navbar = () => {
             ref={navRef}
             className="absolute top-0 left-0 w-full z-30 px-6 md:px-12 py-6"
         >
-        <div className="flex items-center justify-between text-[var(--accent)]">
+            <div className="flex items-center justify-between text-accent">
                 {/* Logo */}
-                <Link href="/" className="text-2xl tracking-wide font-heading">
+                <Link href="/" className="text-2xl tracking-wide font-heading font-bold">
                     StillMind
                 </Link>
 
@@ -69,8 +71,8 @@ const Navbar = () => {
                 className={`
           md:hidden
           absolute left-0 top-full w-full
-          bg-[var(--secondary)]
-          text-[var(--primary)]
+          bg-secondary
+          text-primary
           transition-all duration-300
           ${open ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2 pointer-events-none"}
         `}
